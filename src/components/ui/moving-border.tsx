@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { i } from "framer-motion/client";
 
 export function Button({
   borderRadius = "1.75rem",
@@ -82,7 +83,10 @@ export const MovingBorder = ({
   ry?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<any>();
+  // const pathRef = useRef<any>();
+  const pathRef = useRef<SVGRectElement | null>(null);
+
+  
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {

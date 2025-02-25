@@ -62,7 +62,7 @@ export function FocusCards({ cards }: { cards: Card[] }) {
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mx-auto md:px-8 max-w-7xl place-items-center">
         {cards.map((card, index) => (
           <Card
-            key={card.title}
+            key={`${card.title}-${index}`}
             card={card}
             index={index}
             hovered={hovered}
