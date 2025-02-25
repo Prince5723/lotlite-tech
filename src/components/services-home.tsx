@@ -214,7 +214,7 @@ const SkeletonTwo: React.FC = () => {
 const SkeletonThree: React.FC = () => {
   return (
     <Link
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
+      href="https://www.youtube.com/watch?v=-FKQwXtrSSQ"
       target="_blank"
       className="relative flex gap-10 h-full group/image"
     >
