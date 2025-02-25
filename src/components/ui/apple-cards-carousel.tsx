@@ -5,6 +5,7 @@ import React, {
   useState,
   createContext,
   useContext,
+  JSX
 } from "react";
 import {
   IconArrowNarrowLeft,
@@ -17,9 +18,10 @@ import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.ReactElement[];
   initialScroll?: number;
 }
+
 
 type Card = {
   src: string;
@@ -184,6 +186,7 @@ export const Card = ({
   }, [open]);
 
   useOutsideClick(containerRef, () => handleClose());
+
 
   const handleOpen = () => {
     setOpen(true);
