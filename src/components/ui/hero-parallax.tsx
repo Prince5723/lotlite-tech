@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import {CoverDemo} from '@/components/hero-cover'
-import { div } from "framer-motion/client";
+import {MovingBorderDemo} from '@/components/moving-border'
 
 export const HeroParallax = ({
   products,
@@ -29,6 +29,20 @@ export const HeroParallax = ({
     target: ref,
     offset: ["start start", "end start"],
   });
+
+  // Track if items have moved below their original position
+  const [isBelow, setIsBelow] = useState(false);
+
+  // Monitor scroll position to determine if elements have moved below
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((value) => {
+      // When scrollYProgress is above a certain threshold, items will have moved below their original position
+      // Adjust this threshold as needed based on your animation timing
+      setIsBelow(value > 0.1);
+    });
+    
+    return () => unsubscribe();
+  }, [scrollYProgress]);
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
@@ -72,29 +86,32 @@ export const HeroParallax = ({
         }}
         className=""
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20 pointer-events-none">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
+              isClickable={isBelow}
               key={product.title}
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row mb-20 space-x-20 pointer-events-none">
+        <motion.div className="flex flex-row mb-20 space-x-20">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateXReverse}
+              isClickable={isBelow}
               key={product.title}
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 pointer-events-none">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
               translate={translateX}
+              isClickable={isBelow}
               key={product.title}
             />
           ))}
@@ -106,12 +123,13 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-<>
-    <div className="max-w-7xl text-white relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0 z-10">
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-        <CoverDemo/>
-      </h1>
-    </div>
+    <>
+      <div className="max-w-7xl text-white relative mx-auto py-20 md:py-38 px-4 w-full left-0 top-0 z-10">
+        <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
+          <CoverDemo/>
+        </h1>
+        <MovingBorderDemo title="Explore Courses"/>
+      </div>
     </>
   );
 };
@@ -119,6 +137,7 @@ export const Header = () => {
 export const ProductCard = ({
   product,
   translate,
+  isClickable,
 }: {
   product: {
     title: string;
@@ -126,9 +145,37 @@ export const ProductCard = ({
     thumbnail: string;
   };
   translate: MotionValue<number>;
+  isClickable: boolean;
 }) => {
+  // Create a ref to track current Y position
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [canClick, setCanClick] = useState(false);
+  
+  useEffect(() => {
+    if (!isClickable) {
+      setCanClick(false);
+      return;
+    }
+    
+    // If isClickable is true, we can start checking actual position
+    const checkPosition = () => {
+      if (cardRef.current) {
+        const rect = cardRef.current.getBoundingClientRect();
+        // Check if the element has moved below its original position
+        // You might need to adjust this logic based on your layout
+        const hasMoved = rect.y > 0; // This is a simplification, adjust as needed
+        setCanClick(hasMoved);
+      }
+    };
+
+    checkPosition();
+    window.addEventListener('scroll', checkPosition);
+    return () => window.removeEventListener('scroll', checkPosition);
+  }, [isClickable]);
+
   return (
     <motion.div
+      ref={cardRef}
       style={{
         x: translate,
       }}
@@ -136,9 +183,13 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-96 w-[30rem] relative flex-shrink-0 pointer-events-auto"
+      className={`group/product h-96 w-[30rem] relative flex-shrink-0 ${canClick ? 'pointer-events-auto' : 'pointer-events-none'}`}
     >
-      <Link href={product.link} className="block group-hover/product:shadow-2xl pointer-events-auto">
+      <Link 
+        href={product.link} 
+        className="block group-hover/product:shadow-2xl"
+        onClick={(e) => !canClick && e.preventDefault()}
+      >
         <Image
           src={product.thumbnail}
           height="600"

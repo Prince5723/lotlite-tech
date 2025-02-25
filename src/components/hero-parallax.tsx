@@ -5,61 +5,60 @@ import { HeroParallax } from "./ui/hero-parallax";
 export function HeroParallaxDemo() {
   return <HeroParallax products={products} />;
 }
+
 export const products = [
   {
     title: "Moonbeam",
-    link: "https://gomoonbeam.com",
+    link: "#",
     thumbnail:
-      "https://lotlitetechnology.com/media/course_images/autodesk-revit-courses-scaled.jpg",
+      "https://venturebeat.com/wp-content/uploads/2024/12/776246284_03.jpg",
   },
   {
     title: "Cursor",
-    link: "https://cursor.so",
+    link: "#",
+    thumbnail:
+      "https://res.cloudinary.com/dyg1rahpk/image/upload/v1740426812/adobe_nxhf07.jpg",
+  },
+  {
+    title: "Rogue",
+    link: "#",
+    thumbnail:
+      "https://imcinstitute.ae/public/uploads/images/image_lg/game-development-with-unity-3d.png",
+  },
+  {
+    title: "Editorially",
+    link: "#",
+    thumbnail:
+      "https://d3mxt5v3yxgcsr.cloudfront.net/courses/19907/course_19907_image.png",
+  },
+  {
+    title: "Editrix AI",
+    link: "#",
+    thumbnail:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CQ-s-zZl9EArsGN8fbIixvcs8Moj1J3oDQ&s",
+  },
+  {
+    title: "Pixel Perfect",
+    link: "#",
+    thumbnail:
+      "https://res.cloudinary.com/dyg1rahpk/image/upload/v1740428600/ckbvxm4xfp0ac0mqjvzx.jpg",
+  },
+  {
+    title: "Algochurn",
+    link: "#",
     thumbnail:
       "https://lotlitetechnology.com/media/course_images/27.jpg",
   },
   {
-    title: "Rogue",
-    link: "https://userogue.com",
-    thumbnail:
-      "https://lotlitetechnology.com/media/course_images/Apple-new-professional-training-hero_big.jpg.slideshow-medium.jpg",
-  },
-
-  {
-    title: "Editorially",
-    link: "https://editorially.org",
-    thumbnail:
-      "https://lotlitetechnology.com/media/course_images/adobe-training.png",
-  },
-  {
-    title: "Editrix AI",
-    link: "https://editrix.ai",
-    thumbnail:
-      "https://lotlitetechnology.com/media/course_images/1696603940780.png",
-  },
-  {
-    title: "Pixel Perfect",
-    link: "https://app.pixelperfect.quest",
-    thumbnail:
-      "https://lotlitetechnology.com/media/course_images/google-certs.png",
-  },
-
-  {
-    title: "Algochurn",
-    link: "https://algochurn.com",
-    thumbnail:
-      "https://lotlitetechnology.com/media/course_images/901e5084-8011-41b5-9e09-969822338210_5.png",
-  },
-  {
     title: "Aceternity UI",
-    link: "https://ui.aceternity.com",
+    link: "#",
     thumbnail:
-      "https://lotlitetechnology.com/media/course_images/Untitled-design-26.png",
+      "https://images.unsplash.com/photo-1592898741922-5dd6de5f698c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGlvc3xlbnwwfHwwfHx8MA%3D%3D",
   },
   {
     title: "Tailwind Master Kit",
-    link: "https://tailwindmasterkit.com",
+    link: "#",
     thumbnail:
-      "https://lotlitetechnology.com/media/course_images/Azure-training-IMG.jpg",
+      "https://lotlitetechnology.com/media/course_images/google-certs.png",
   }
 ];

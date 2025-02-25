@@ -78,16 +78,16 @@ export function FeaturesSectionDemo() {
       </div>
 
       <div className="relative">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border rounded-md dark:border-neutral-800">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} className={feature.className}>
-              <FeatureTitle>{feature.title}</FeatureTitle>
-              <FeatureDescription>{feature.description}</FeatureDescription>
-              <div className="h-full w-full">{feature.skeleton}</div>
-            </FeatureCard>
-          ))}
-        </div>
-      </div>
+  <div className="grid grid-cols-1 lg:grid-cols-6 text-justify mt-12 xl:border rounded-md dark:border-neutral-800">
+    {features.map((feature) => (
+      <FeatureCard key={feature.title} className={feature.className}>
+        <FeatureTitle>{feature.title}</FeatureTitle>
+        <FeatureDescription>{feature.description}</FeatureDescription>
+        <div className="h-full w-full">{feature.skeleton}</div>
+      </FeatureCard>
+    ))}
+  </div>
+</div>
     </div>
   );
 }
@@ -112,7 +112,7 @@ const FeatureDescription: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <p className="text-sm md:text-base max-w-sm mx-0 text-left text-neutral-500 dark:text-neutral-300 font-normal my-2">
+    <p className="text-sm md:text-base max-w-sm mx-0 text-justify text-neutral-500 dark:text-neutral-300 font-normal my-2">
       {children}
     </p>
   );

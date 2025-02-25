@@ -42,28 +42,28 @@ function Navbar({ className }: { className?: string }) {
           <MenuItem setActive={setActive} active={active} item="Courses">
             <div className="text-sm grid grid-cols-2 gap-10 p-4">
               <ProductItem
-                title="Algochurn"
-                href="https://algochurn.com"
-                src="https://assets.aceternity.com/demos/algochurn.webp"
-                description="Prepare for tech interviews like never before."
+                title="Adobe Creative Cloud"
+                href="#"
+                src="https://res.cloudinary.com/dyg1rahpk/image/upload/v1740426812/adobe_nxhf07.jpg"
+                description="Master the art of creativity with Adobe Creative Cloud’s powerful design and editing tools."
               />
               <ProductItem
-                title="Tailwind Master Kit"
-                href="https://tailwindmasterkit.com"
-                src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-                description="Production ready Tailwind css components for your next project"
+                title="AWS"
+                href="#"
+                src="https://venturebeat.com/wp-content/uploads/2024/12/776246284_03.jpg"
+                description="Learn AWS cloud computing, networking, storage, security, and deployment with hands-on practice."
               />
               <ProductItem
-                title="Moonbeam"
-                href="https://gomoonbeam.com"
-                src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-                description="Never write from scratch again. Go from idea to blog in minutes."
+                title="Project Management"
+                href="#"
+                src="https://res.cloudinary.com/dyg1rahpk/image/upload/v1740428600/ckbvxm4xfp0ac0mqjvzx.jpg"
+                description="Learn project management principles, methodologies, and tools to effectively plan, execute, and deliver projects."
               />
               <ProductItem
-                title="Rogue"
-                href="https://userogue.com"
-                src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-                description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+                title="Microsoft Azure"
+                href="#"
+                src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/19907/course_19907_image.png"
+                description="Master Microsoft Azure's cloud services, including computing, networking, security, and AI integration."
               />
             </div>
           </MenuItem>
