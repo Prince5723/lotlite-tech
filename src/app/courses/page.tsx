@@ -35,11 +35,12 @@ export default function Home() {
   return (
     <>
       <NavContainerDemo />
-      <div className="container mx-auto px-4 py-8">
+      <h1 className="text-center text-4xl font-bold py-12 text-white">Courses</h1>
+      <div className="container mx-auto ">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
         {courses.length > 0 ? (
           courses.map((course) => (
-            <div key={course._id} className="flex justify-center">
+            <div key={course._id} className="">
               <ThreeDCardDemo
                 title={course.title}
                 description={course.description}
