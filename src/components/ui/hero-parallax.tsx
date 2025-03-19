@@ -128,7 +128,10 @@ export const Header = () => {
         <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
           <CoverDemo/>
         </h1>
-        <MovingBorderDemo title="Explore Courses"/>
+        <div className="flex gap-5">
+        <MovingBorderDemo title="Explore Courses" url="/courses"/>
+        <MovingBorderDemo title="Request A Call" url="/contact"/>
+        </div>
       </div>
     </>
   );

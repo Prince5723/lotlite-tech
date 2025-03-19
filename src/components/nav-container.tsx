@@ -23,7 +23,7 @@ export function NavContainerDemo() {
       </div>
 
       <NavbarDemo/>
-      <MovingBorderDemo/>
+      <MovingBorderDemo title="Request A Call" url="/contact"/>
 
 
       </div>

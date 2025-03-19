@@ -9,6 +9,7 @@ export async function POST(req: Request) {
     const course = await Course.create(body);
     return NextResponse.json(course, { status: 201 });
   } catch (error: any) {
+    console.log(error);
     return NextResponse.json(
       { error: error.message || 'Something went wrong' },
       { status: 500 }
