@@ -58,7 +58,7 @@ export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center w-full mt-32">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mx-auto md:px-8 max-w-7xl place-items-center">
         {cards.map((card, index) => (
           <Card

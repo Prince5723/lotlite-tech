@@ -1,38 +1,93 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { TracingBeam } from "./ui/tracing-beam";
 
 export function TracingBeamDemo() {
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [imagesLoaded, setImagesLoaded] = useState(0);
+    const totalImages = dummyContent.filter(item => item.image).length;
+    const [contentHeight, setContentHeight] = useState(0);
+
+    // Handle image load events
+    const handleImageLoad = () => {
+        setImagesLoaded(prev => prev + 1);
+    };
+
+    // Update content height when images are loaded or content changes
+    useEffect(() => {
+        const updateHeight = () => {
+            if (contentRef.current) {
+                const height = contentRef.current.offsetHeight;
+                setContentHeight(height);
+                console.log("Content height updated:", height);
+            }
+        };
+
+        // Update height initially
+        updateHeight();
+
+        // Also update height when all images are loaded
+        if (imagesLoaded === totalImages && totalImages > 0) {
+            updateHeight();
+        }
+
+        // Force recalculation after a delay to catch any late rendering
+        const timer = setTimeout(() => {
+            updateHeight();
+        }, 1000);
+
+        // Set up resize observer to handle dynamic content changes
+        const resizeObserver = new ResizeObserver(() => {
+            updateHeight();
+        });
+
+        if (contentRef.current) {
+            resizeObserver.observe(contentRef.current);
+        }
+
+        return () => {
+            clearTimeout(timer);
+            if (contentRef.current) {
+                resizeObserver.unobserve(contentRef.current);
+            }
+        };
+    }, [imagesLoaded, totalImages]);
+
     return (
         <>
-        <h3 className="text-3xl font-bold text-white text-center mt-20 mb-12">Our Services</h3>
-        <TracingBeam className="px-6">
-            <div className="max-w-2xl mx-auto antialiased pt-4 relative">
-                {dummyContent.map((item, index) => (
-                    <div key={`content-${index}`} className="mb-10">
-                        <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-                            {item.badge}
-                        </h2>
+            <h3 className="text-3xl font-bold text-white text-center mt-20 mb-12">Our Services</h3>
+            <TracingBeam className="px-6" key={`tracing-beam-${contentHeight}`}>
+                <div ref={contentRef} className="max-w-2xl mx-auto antialiased pt-4 relative pb-10">
+                    {dummyContent.map((item, index) => (
+                        <div 
+                            key={`content-${index}`} 
+                            className={`mb-10 ${index === dummyContent.length - 1 ? 'mb-0' : ''}`}
+                        >
+                            <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
+                                {item.badge || `Service ${index + 1}`}
+                            </h2>
 
-                        <p className="text-xl mb-4 text-white">{item.title}</p>
+                            <p className="text-xl mb-4 text-white">{item.title}</p>
 
-                        <div className="text-lg prose-invert text-white">
-                            {item?.image && (
-                                <Image
-                                    src={item.image}
-                                    alt="blog thumbnail"
-                                    height="1000"
-                                    width="1000"
-                                    className="rounded-lg mb-10 object-cover"
-                                />
-                            )}
-                            {item.description}
+                            <div className="text-lg prose-invert text-white">
+                                {item?.image && (
+                                    <Image
+                                        src={item.image}
+                                        alt="blog thumbnail"
+                                        height="1000"
+                                        width="1000"
+                                        className="rounded-lg mb-10 object-cover"
+                                        onLoad={handleImageLoad}
+                                        priority={index < 2} // Prioritize loading first two images
+                                    />
+                                )}
+                                {item.description}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        </TracingBeam>
+                    ))}
+                </div>
+            </TracingBeam>
         </>
     );
 }
@@ -43,7 +98,7 @@ const dummyContent = [
         description: (
             <>
                 <p>
-                    Empower your workforce with industry-leading skills through our expert-led training and certification programs. We offer hands-on workshops, practical learning sessions, and globally recognized certifications to help individuals and teams stay ahead in today’s competitive landscape.
+                    Empower your workforce with industry-leading skills through our expert-led training and certification programs. We offer hands-on workshops, practical learning sessions, and globally recognized certifications to help individuals and teams stay ahead in today's competitive landscape.
                     <span className="italic"> Our Offerings: Cybersecurity Certification Programs, Blockchain and Web3 Training, Cloud and DevOps Courses, Enterprise Software Training, and Customized Corporate Training</span>
                 </p>
             </>

@@ -1,10 +1,10 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   motion,
   useTransform,
   useScroll,
-  useVelocity,
   useSpring,
 } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -31,15 +31,16 @@ export const TracingBeam = ({
     }
   }, []);
 
+  // Adjusting the y1 and y2 values to ensure the beam ends with the content
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+    useTransform(scrollYProgress, [0, 0.8], [50, svgHeight - 50]), // Reduced end point
     {
       stiffness: 500,
       damping: 90,
     },
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
+    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 50]), // Reduced end point
     {
       stiffness: 500,
       damping: 90,
@@ -80,12 +81,12 @@ export const TracingBeam = ({
         <svg
           viewBox={`0 0 20 ${svgHeight}`}
           width="20"
-          height={svgHeight} // Set the SVG height
+          height={svgHeight}
           className="ml-4 block"
           aria-hidden="true"
         >
           <motion.path
-            d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
+            d={`M 1 0V -36 l 18 24 V ${svgHeight - 36} l -18 24V ${svgHeight}`}
             fill="none"
             stroke="#9091A0"
             strokeOpacity="0.16"
@@ -94,7 +95,7 @@ export const TracingBeam = ({
             }}
           ></motion.path>
           <motion.path
-            d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
+            d={`M 1 0V -36 l 18 24 V ${svgHeight - 36} l -18 24V ${svgHeight}`}
             fill="none"
             stroke="url(#gradient)"
             strokeWidth="1.25"
@@ -109,8 +110,8 @@ export const TracingBeam = ({
               gradientUnits="userSpaceOnUse"
               x1="0"
               x2="0"
-              y1={y1} // set y1 for gradient
-              y2={y2} // set y2 for gradient
+              y1={y1}
+              y2={y2}
             >
               <stop stopColor="#18CCFC" stopOpacity="0"></stop>
               <stop stopColor="#18CCFC"></stop>
