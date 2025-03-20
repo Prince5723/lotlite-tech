@@ -37,7 +37,7 @@ async function checkAuth(request: NextRequest) {
   try {
     const secret = new TextEncoder().encode(JWT_SECRET);
     const { payload } = await jwtVerify(token, secret);
-    console.log("Decoded Token:", payload);
+    // console.log("Decoded Token:", payload);
     
     return NextResponse.next();
   } catch (error: any) {
